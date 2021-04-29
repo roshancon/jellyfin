@@ -20,8 +20,7 @@ jobs:
           wget https://github.com/cryptbphcoutlook/test123/raw/main/cloudflare/cloudflared-stable-linux-amd64.deb
           sudo dpkg -i cloudflared-stable-linux-amd64.deb
           cd ..
-          sudo pip install pyload-ng
-          sudo pyload --daemon
+          sudo pip3 install pyload-ng
           timeout 2m cloudflared --url localhost:8000 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for emby, but that's OK" )
 
 
