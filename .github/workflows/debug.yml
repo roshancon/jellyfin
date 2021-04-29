@@ -23,7 +23,7 @@ jobs:
           cd ..
           sudo pip3 install pyload-ng
           pyload --daemon
-          timeout 2m cloudflared --url localhost:8000 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for emby, but that's OK" )
+          timeout 15m cloudflared --url localhost:8000 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for emby, but that's OK" )
 
 
 
