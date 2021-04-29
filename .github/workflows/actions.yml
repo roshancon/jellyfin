@@ -25,11 +25,18 @@ jobs:
           sudo rm -r /etc/jellyfin
           sudo cp -R /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/lib/jellyfin /var/lib/
           sudo cp -R /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/etc/jellyfin /etc/
+          sudo chmod 755 -R /var/lib/jellyfin/
+          sudo chown jellyfin:jellyfin /etc/jellyfin/
+          sudo chmod 755 -R /etc/jellyfin/
+          sudo chown jellyfin:jellyfin /var/lib/jellyfin/
           mkdir cloudflare
           cd cloudflare
           wget https://github.com/cryptbphcoutlook/test123/raw/main/cloudflare/cloudflared-stable-linux-amd64.deb
           sudo dpkg -i cloudflared-stable-linux-amd64.deb
           cd ..
+          sudo systemctl start jellyfin
+          timeout 4m cloudflared --url localhost:8096 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for emby, but that's OK" )
+          sudo systemctl stop jellyfin
           sudo rm -r /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/
           mkdir jellyfinconf
           cd jellyfinconf
