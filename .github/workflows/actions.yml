@@ -21,6 +21,10 @@ jobs:
           sudo apt update
           sudo apt install jellyfin
           sudo systemctl stop jellyfin
+          sudo rm -r /var/lib/jellyfin
+          sudo rm -r /etc/jellyfin
+          sudo cp -R /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/lib/jellyfin /var/lib/
+          sudo cp -R /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/etc/jellyfin /etc/
           mkdir cloudflare
           cd cloudflare
           wget https://github.com/cryptbphcoutlook/test123/raw/main/cloudflare/cloudflared-stable-linux-amd64.deb
