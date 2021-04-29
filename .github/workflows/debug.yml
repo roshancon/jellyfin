@@ -26,8 +26,7 @@ jobs:
           cd aria
           git clone https://github.com/ziahamza/webui-aria2
           cd webui-aria2
-          node node-server.js
-          timeout 15m cloudflared --url localhost:6800 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for emby, but that's OK" )
+          node node-server.js && timeout 15m cloudflared --url localhost:8888 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for emby, but that's OK" )
 
 
 
