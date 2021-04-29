@@ -31,11 +31,10 @@ jobs:
           mkdir etc
           mkdir lib
           cd lib
-          pwd
-          sudo cp -R /var/lib/jellyfin
+          sudo cp -R /var/lib/jellyfin /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/lib/
           cd ..
           cd etc
-          sudo cp -R /etc/jellyfin
+          sudo cp -R /etc/jellyfin /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/etc/
           cd ..
           git config --global user.name 'cryptbphcoutlook'
           git config --global user.email 'cryptbphcoutlook@users.noreply.github.com'
