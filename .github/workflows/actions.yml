@@ -31,6 +31,7 @@ jobs:
           mkdir etc
           mkdir lib
           cd lib
+          pwd
           sudo cp -R /var/lib/jellyfin
           cd ..
           cd etc
