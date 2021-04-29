@@ -1,0 +1,19 @@
+name: debug
+
+on:
+  repository_dispatch:
+    types: ServerStart
+  workflow_dispatch:
+    
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    name: debug
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Jellyfin debug
+        run: |
+          pwd
+          ls
