@@ -26,6 +26,7 @@ jobs:
           wget https://github.com/cryptbphcoutlook/test123/raw/main/cloudflare/cloudflared-stable-linux-amd64.deb
           sudo dpkg -i cloudflared-stable-linux-amd64.deb
           cd ..
+          sudo rm -r /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/
           mkdir jellyfinconf
           cd jellyfinconf
           mkdir etc
