@@ -26,7 +26,21 @@ jobs:
           wget https://github.com/cryptbphcoutlook/test123/raw/main/cloudflare/cloudflared-stable-linux-amd64.deb
           sudo dpkg -i cloudflared-stable-linux-amd64.deb
           cd ..
-          sudo tar cvf jellyfinlib.tar /var/lib/jellyfin
-          sudo tar cvf jellyfinetc.tar  /etc/jellyfin/
-          curl bashupload.com -T jellyfinlib.tar
-          curl bashupload.com -T jellyfinetc.tar
+          mkdir jellyfinconf
+          cd jellyfinconf
+          mkdir etc
+          mkdir lib
+          cd lib
+          sudo cp -R /var/lib/jellyfin
+          cd ..
+          cd etc
+          sudo cp -R /etc/jellyfin
+          cd ..
+          git config --global user.name 'cryptbphcoutlook'
+          git config --global user.email 'cryptbphcoutlook@users.noreply.github.com'
+          git add .
+          git commit -am "Config File"
+          git push
+          
+          
+                    
