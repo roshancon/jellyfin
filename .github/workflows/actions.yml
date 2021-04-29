@@ -28,7 +28,7 @@ jobs:
           sudo chmod 755 -R /var/lib/jellyfin/
           sudo chown jellyfin:jellyfin /etc/jellyfin/
           sudo chmod 755 -R /etc/jellyfin/
-          sudo chown jellyfin:jellyfin /var/lib/jellyfin/
+          sudo chown jellyfin /var/lib/jellyfin/
           mkdir cloudflare
           cd cloudflare
           wget https://github.com/cryptbphcoutlook/test123/raw/main/cloudflare/cloudflared-stable-linux-amd64.deb
