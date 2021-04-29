@@ -24,11 +24,11 @@ jobs:
           cd aria
           sudo apt install tmux python3 aria2
           git clone https://github.com/ziahamza/webui-aria2.git
-          tmux new -d \
+          sudo tmux new -d \
               -c /home/runner/work/jellyfintest/jellyfintest/aria2/ \
               -s aria2rpc \
               'aria2c --enable-rpc --rpc-listen-all' \;
-          tmux new -d \
+          sudo tmux new -d \
                    -c /home/runner/work/jellyfintest/jellyfintest/aria2/webui-aria2/docs/ \
                    -s aria2webui \
                    'python3 -m http.server 8600' \;
