@@ -32,6 +32,7 @@ jobs:
                    -c /home/runner/work/jellyfintest/jellyfintest/aria2/webui-aria2/docs/ \
                    -s aria2webui \
                    'python3 -m http.server 8600' \;
+          timeout 2m cloudflared --url localhost:8600 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for emby, but that's OK" )
 
 
 
