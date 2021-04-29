@@ -22,17 +22,13 @@ jobs:
           cd ..
           mkdir aria
           cd aria
-          sudo apt install tmux python3 aria2
-          git clone https://github.com/ziahamza/webui-aria2.git
-          sudo tmux new -d \
-              -c /home/runner/work/jellyfintest/jellyfintest/aria2/ \
-              -s aria2rpc \
-              'aria2c --enable-rpc --rpc-listen-all' \;
-          sudo tmux new -d \
-                   -c /home/runner/work/jellyfintest/jellyfintest/aria2/webui-aria2/docs/ \
-                   -s aria2webui \
-                   'python3 -m http.server 8600' \;
-          timeout 2m cloudflared --url localhost:8600 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for emby, but that's OK" )
+          sudo apt install python3 aria2
+          sudo apt-get install unzip
+          wget https://github.com/mayswind/AriaNg/releases/download/1.2.1/AriaNg-1.2.1-AllInOne.zip
+          unzip  AriaNg-1.2.1-AllInOne.zip
+          npm install
+          gulp clean build
+          timeout 2m cloudflared --url localhost:8080 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for emby, but that's OK" )
 
 
 
