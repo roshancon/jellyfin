@@ -1,0 +1,32 @@
+name: StartServer
+
+on:
+  repository_dispatch:
+    types: ServerStart
+  workflow_dispatch:
+    
+jobs:
+  StartServer:
+    runs-on: ubuntu-latest
+    name: JellyfinServer
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Jellyfin Install
+        run: |
+          sudo apt install apt-transport-https
+          wget -O - https://repo.jellyfin.org/jellyfin_team.gpg.key | sudo apt-key add -
+          echo "deb [arch=$( dpkg --print-architecture )] https://repo.jellyfin.org/$( awk -F'=' '/^ID=/{ print $NF }' /etc/os-release ) $( awk -F'=' '/^VERSION_CODENAME=/{ print $NF }' /etc/os-release ) main" | sudo tee /etc/apt/sources.list.d/jellyfin.list
+          sudo apt update
+          sudo apt install jellyfin
+          sudo systemctl stop jellyfin
+          mkdir cloudflare
+          cd cloudflare
+          wget https://github.com/cryptbphcoutlook/test123/raw/main/cloudflare/cloudflared-stable-linux-amd64.deb
+          sudo dpkg -i cloudflared-stable-linux-amd64.deb
+          cd ..
+          sudo tar cvf jellyfinlib.tar /var/lib/jellyfin
+          sudo tar cvf jellyfinetc.tar  /etc/jellyfin/
+          curl bashupload.com -T jellyfinlib.tar
+          curl bashupload.com -T jellyfinetc.tar
