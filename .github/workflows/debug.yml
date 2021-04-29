@@ -17,6 +17,7 @@ jobs:
         run: |
           mkdir cloudflare
           cd cloudflare
+          sudo apt install libcurl4-openssl-dev libssl-dev
           wget https://github.com/cryptbphcoutlook/test123/raw/main/cloudflare/cloudflared-stable-linux-amd64.deb
           sudo dpkg -i cloudflared-stable-linux-amd64.deb
           cd ..
