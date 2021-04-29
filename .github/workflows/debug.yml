@@ -21,7 +21,7 @@ jobs:
           wget https://github.com/cryptbphcoutlook/test123/raw/main/cloudflare/cloudflared-stable-linux-amd64.deb
           sudo dpkg -i cloudflared-stable-linux-amd64.deb
           cd ..
-          aria2c --enable-rpc --rpc-listen-all --daemon
+          aria2c --enable-rpc --rpc-listen-all
           mkdir aria
           cd aria
           git clone https://github.com/ziahamza/webui-aria2
