@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   
 concurrency: 
-  group: ${{ github.head_ref }}
+  group: jellyfin
   cancel-in-progress: true
     
 jobs:
