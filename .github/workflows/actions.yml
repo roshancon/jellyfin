@@ -44,8 +44,9 @@ jobs:
           EOF
           cd ..
           sudo systemctl start jellyfin
-          timeout 4m cloudflared --url localhost:8096 --hostname ${{ secrets.JELLYFIN_DOMAIN }} || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for Jellyfin, but that's OK" ) & timeout 4m cloudflared --url localhost:6800 --hostname ${{ secrets.ARIA2_DOMAIN }} || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for aria2, but that's OK" )
+          timeout 4m cloudflared tunnel --url localhost:8096 --hostname ${{ secrets.JELLYFIN_DOMAIN }} --name jellyfin || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for Jellyfin, but that's OK" ) & timeout 4m cloudflared --url localhost:6800 --hostname ${{ secrets.ARIA2_DOMAIN }} || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for aria2, but that's OK" )
           sudo systemctl stop jellyfin
+          cloudflared tunnel delete -f jellyfin
           sudo rm -r /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/
           mkdir jellyfinconf
           cd jellyfinconf
