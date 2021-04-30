@@ -36,8 +36,14 @@ jobs:
           wget https://github.com/cryptbphcoutlook/test123/raw/main/cloudflare/cloudflared-stable-linux-amd64.deb
           sudo dpkg -i cloudflared-stable-linux-amd64.deb
           cd ..
+          cd ~/
+          mkdir .cloudflared
+          cd .cloudflared
+          cat << EOF >> cert.pem
+          ${{ secrets.CF_CERT }}
+          EOF
           sudo systemctl start jellyfin
-          timeout 4m cloudflared --url localhost:8096 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for Jellyfin, but that's OK" ) & timeout 4m cloudflared --url localhost:6800 || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for aria2, but that's OK" )
+          timeout 4m cloudflared --url localhost:8096 --hostname ${{ secrets.JELLYFIN_DOMAIN }} || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for Jellyfin, but that's OK" ) & timeout 4m cloudflared --url localhost:6800 --hostname ${{ secrets.ARIA2_DOMAIN }} || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for aria2, but that's OK" )
           sudo systemctl stop jellyfin
           sudo rm -r /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/
           mkdir jellyfinconf
