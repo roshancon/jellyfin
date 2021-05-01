@@ -28,8 +28,8 @@ jobs:
           sudo systemctl stop jellyfin
           sudo rm -r /var/lib/jellyfin
           sudo rm -r /etc/jellyfin
-          sudo cp -R /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/lib/jellyfin /var/lib/
-          sudo cp -R /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/etc/jellyfin /etc/
+          sudo cp -R /home/runner/work/jellyfin/jellyfin/jellyfinconf/lib/jellyfin /var/lib/
+          sudo cp -R /home/runner/work/jellyfin/jellyfin/jellyfinconf/etc/jellyfin /etc/
           sudo chmod 755 -R /var/lib/jellyfin/
           sudo chown -R jellyfin:jellyfin /etc/jellyfin/
           sudo chmod 755 -R /etc/jellyfin/
@@ -49,19 +49,19 @@ jobs:
           sudo systemctl start jellyfin
           timeout 345m cloudflared --url localhost:8096 --hostname ${{ secrets.JELLYFIN_DOMAIN }} || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for Jellyfin, but that's OK" )  & timeout 345m cloudflared --url localhost:6800 --hostname ${{ secrets.ARIA2_DOMAIN }} || ( [[ $? -eq 124 ]] && \echo "WARNING: Timeout reached for aria2, but that's OK" )
           sudo systemctl stop jellyfin
-          sudo rm -r /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/
+          sudo rm -r /home/runner/work/jellyfin/jellyfin/jellyfinconf/
           mkdir jellyfinconf
           cd jellyfinconf
           mkdir etc
           mkdir lib
           cd lib
-          sudo cp -R /var/lib/jellyfin /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/lib/
+          sudo cp -R /var/lib/jellyfin /home/runner/work/jellyfin/jellyfin/jellyfinconf/lib/
           cd ..
           cd etc
-          sudo cp -R /etc/jellyfin /home/runner/work/jellyfintest/jellyfintest/jellyfinconf/etc/
+          sudo cp -R /etc/jellyfin /home/runner/work/jellyfin/jellyfin/jellyfinconf/etc/
           cd ..
-          sudo git config --global user.name 'cryptbphcoutlook'
-          sudo git config --global user.email 'cryptbphcoutlook@users.noreply.github.com'
+          sudo git config --global user.name 'roshancon'
+          sudo git config --global user.email 'roshancon@users.noreply.github.com'
           sudo git add .
           sudo git commit -am "Config File"
           sudo git push
